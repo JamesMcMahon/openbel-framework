@@ -8,10 +8,21 @@ import javax.ws.rs.core.MediaType;
 @Path("test")
 public class Test {
 
-	@GET
-	@Produces({MediaType.TEXT_PLAIN})
-	public String test() {
-		return "test";
-	}
-	
+    // XXX not the right way to do switch result types, but it's just a test
+    @GET
+    @Path("text")
+    @Produces({ MediaType.TEXT_PLAIN })
+    public String text() {
+        return "test";
+    }
+    
+    /*
+    @GET
+    @Path("json")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String json() {
+        return "test";
+    }
+    */
+
 }

@@ -10,7 +10,7 @@
     <!-- <logger name="org.openbel" level="DEBUG" /> -->
     <!-- <logger name="org.hibernate" level="TRACE" /> -->
 
-    <root level="WARN">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>

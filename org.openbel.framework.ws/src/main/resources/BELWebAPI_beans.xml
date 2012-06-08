@@ -13,10 +13,11 @@
 >
 
     <context:annotation-config />
-    <context:component-scan base-package="org.openbel.framework.ws">
-        <!-- do not autowire endpoints; these are handled in belframework-servlet.xml -->
+    <!--<context:component-scan base-package="org.openbel.framework.ws">
+        [> do not autowire endpoints; these are handled in belframework-servlet.xml <]
         <context:exclude-filter type="annotation" expression="org.springframework.ws.server.endpoint.annotation.Endpoint"/>
-    </context:component-scan>
+    </context:component-scan>-->
+	<context:component-scan base-package="org.openbel.framework.ws.service" />
 
     <!-- beans from libraries: no stereotype annotations; cannot be autowired -->
     <bean id="belSystemConfiguration" class="org.openbel.framework.common.cfg.SystemConfiguration" factory-method="createSystemConfiguration">
