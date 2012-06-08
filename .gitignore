@@ -8,6 +8,7 @@ Servers
 */.classpath
 */.project
 */.settings
+*/bin
 
 #vim swap files
 *.swp
