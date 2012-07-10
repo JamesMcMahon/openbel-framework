@@ -72,6 +72,12 @@ public class KAMStoreSchemaServiceImpl implements KAMStoreSchemaService {
     private static final String KAM_SQL_PATH = "/kam/";
 
     /**
+     * The classpath location where the KAM indices .sql files are located:
+     * {@value #KAM_SQL_PATH}
+     */
+    private static final String KAM_INDICES_SQL_PATH = "/kam_indices/";
+
+    /**
      * The classpath location where the .sql files to delete KAM schema are located:
      * {@value #DELETE_KAM_SQL_PATH}
      */
@@ -123,6 +129,17 @@ public class KAMStoreSchemaServiceImpl implements KAMStoreSchemaService {
             throws IOException {
 
         runScripts(dbc, "/" + dbc.getType() + KAM_SQL_PATH, schemaName,
+                getSchemaManagementStatus(dbc));
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setupKAMStoreIndices(DBConnection dbc, String schemaName)
+            throws IOException {
+
+        runScripts(dbc, "/" + dbc.getType() + KAM_INDICES_SQL_PATH, schemaName,
                 getSchemaManagementStatus(dbc));
     }
 

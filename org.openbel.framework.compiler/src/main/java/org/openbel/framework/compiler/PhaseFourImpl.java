@@ -95,6 +95,7 @@ public class PhaseFourImpl implements DefaultPhaseFour {
     @Override
     public void stage3CreateKAMstore(final DBConnection db, String schemaName)
             throws CreateKAMFailure {
+        System.out.println("stage3: create kam store");
         if (db == null) {
         	throw new InvalidArgument("db", db);
         }
@@ -118,6 +119,7 @@ public class PhaseFourImpl implements DefaultPhaseFour {
             String schema) throws DatabaseError, CreateKAMFailure {
         JdbcKAMLoaderImpl jkl;
 
+        System.out.println("stage4: load kam");
         try {
             jkl = new JdbcKAMLoaderImpl(dbConnection, schema);
         } catch (SQLException e) {
@@ -236,8 +238,31 @@ public class PhaseFourImpl implements DefaultPhaseFour {
             final String msg = "Error loading statement annotations";
             throw new DatabaseError(schema, msg, e);
         }
-
+        
+        // System.out.println("inserting indices");
+        // insertKamStoreIndices(dbConnection, schema);
+        // System.out.println("finished indices");
+        
         // close loader dao
         jkl.terminate();
+    }
+    
+    private void insertKamStoreIndices(final DBConnection db, String schemaName)
+            throws DatabaseError {
+        if (db == null) {
+        	throw new InvalidArgument("db", db);
+        }
+
+        try {
+            ksss.setupKAMStoreIndices(db, schemaName);
+        } catch (IOException e) {
+            final String msg = "Error reading kam store indices file";
+            // FIXME
+            // throw new DatabaseError(schemaName, msg, e);
+            System.err.println(msg);
+        } catch (SQLException e) {
+            final String msg = "Error loading kam store indices";
+            throw new DatabaseError(schemaName, msg, e);
+        }
     }
 }

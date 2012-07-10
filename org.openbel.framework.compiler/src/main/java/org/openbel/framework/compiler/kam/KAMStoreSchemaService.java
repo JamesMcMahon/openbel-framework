@@ -76,6 +76,20 @@ public interface KAMStoreSchemaService {
             throws SQLException, IOException;
 
     /**
+     * Set up a KAMstore indices (including foreign keys) for the specific 
+     * {@link DBConnection}.
+     *
+     * @param dbc {@link DBConnection}, the database connection to use
+     * @param schemaName {@link String}, the kam schema name, which cannot be
+     * null or empty
+     * @throws SQLException Thrown if a SQL error occurred setting up indices
+     * @throws IOException Thrown if an I/O error occurred reading SQL files
+     * needed to set up indices
+     */
+    public void setupKAMStoreIndices(DBConnection dbc, String schemaName)
+            throws SQLException, IOException;
+
+    /**
      * Delete a KAMstore schema for the specific {@link DBConnection}.
      *
      * @param dbc {@link DBConnection}, the database connection to use
